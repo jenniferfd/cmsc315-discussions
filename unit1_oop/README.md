@@ -23,6 +23,16 @@ Complete all TODO sections in the source code:
 5. Create and test objects in `main()`.
 6. Add a student-created extension.
 
+## Implementation Documentation
+
+I created a parent class with class and instance variables, a constructor, and a method that displayed object information. I then created a child class that inherited from the parent class and added additional variables, a new method, and an overridden method.
+
+I demonstrated class and instance namespaces by creating multiple child objects, accessing class variables through both the class and an object, adding an attribute to only one instance, and displaying namespace information with `__dict__`.
+
+I also demonstrated shallow and deep copying using nested mutable data. After modifying the original object's nested list, the shallow copy reflected the change while the deep copy remained independent.
+
+For my student-created extension, I added functionality that allowed a student object to add courses to its course list.
+
 ## Discussion Board Reflection
 
 After completing the programming assignment, add this reflection to your initial discussion post in LEO.

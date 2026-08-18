@@ -9,7 +9,6 @@ You are provided with starter code containing TODO sections. Your task is to com
 analyze the code to demonstrate understanding of inheritance, namespaces, and object copying.
 """
 
-
 from copy import copy, deepcopy
 
 
@@ -25,7 +24,14 @@ from copy import copy, deepcopy
 # Replace the pass statement with your implementation.
 
 class ParentClass:
-    pass
+    category = "General Person"
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display_info(self):
+        return f"Name: {self.name}, Age: {self.age}"
 
 
 # TODO 2:
@@ -41,7 +47,21 @@ class ParentClass:
 # Replace the pass statement with your implementation.
 
 class ChildClass(ParentClass):
-    pass
+    role = "Student"
+
+    def __init__(self, name, age, student_id, courses):
+        super().__init__(name, age)
+        self.student_id = student_id
+        self.courses = courses
+
+    def display_info(self):
+        return (
+            f"Name: {self.name}, Age: {self.age}, "
+            f"Student ID: {self.student_id}, Courses: {self.courses}"
+        )
+
+    def add_course(self, course_name):
+        self.courses.append(course_name)
 
 
 # TODO 3:
@@ -57,7 +77,23 @@ class ChildClass(ParentClass):
 
 def demonstrate_namespaces():
     print("\n=== Namespace Demonstration ===")
-    print("TODO: Implement namespace demonstration")
+
+    student1 = ChildClass("Jennifer", 25, "S1001", ["CMSC 315"])
+    student2 = ChildClass("Alex", 22, "S1002", ["CMSC 215"])
+
+    print("Class variable through class:", ChildClass.role)
+    print("Class variable through object:", student1.role)
+
+    student1.favorite_language = "Python"
+
+    print("\nStudent 1 namespace:")
+    print(student1.__dict__)
+
+    print("\nStudent 2 namespace:")
+    print(student2.__dict__)
+
+    print("\nChildClass namespace:")
+    print(ChildClass.__dict__)
 
 
 # TODO 4:
@@ -73,7 +109,33 @@ def demonstrate_namespaces():
 
 def demonstrate_copying():
     print("\n=== Copy Demonstration ===")
-    print("TODO: Implement shallow copy and deep copy demonstration")
+
+    original = ChildClass(
+        "Jordan",
+        21,
+        "S2001",
+        [["CMSC 315", "Data Structures"], ["CMSC 215", "Programming"]]
+    )
+
+    shallow_copy = copy(original)
+    deep_copy = deepcopy(original)
+
+    original.courses[0].append("Python")
+
+    print("Original:")
+    print(original.courses)
+
+    print("\nShallow copy:")
+    print(shallow_copy.courses)
+
+    print("\nDeep copy:")
+    print(deep_copy.courses)
+
+    # A shallow copy creates a new outer object, but nested mutable
+    # objects are still shared with the original.
+    #
+    # A deep copy creates completely separate copies of nested objects,
+    # so changes to the original do not affect the deep copy.
 
 
 # TODO 5:
@@ -89,9 +151,20 @@ def demonstrate_copying():
 def main():
     print("=== Unit 1 OOP Assignment ===")
 
-    print("\nTODO: Create and test your parent object")
+    print("\nParent Object")
+    parent = ParentClass("Taylor", 40)
+    print(parent.display_info())
 
-    print("\nTODO: Create and test your child object")
+    print("\nChild Object")
+    child = ChildClass("Jennifer", 25, "S1001", ["CMSC 315"])
+    print(child.display_info())
+
+    child.add_course("CMSC 310")
+    print(child.display_info())
+
+    print("\nEdge Case: Student With No Courses")
+    empty_student = ChildClass("Morgan", 20, "S3001", [])
+    print(empty_student.display_info())
 
     demonstrate_namespaces()
     demonstrate_copying()
