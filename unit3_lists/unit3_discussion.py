@@ -22,7 +22,25 @@ def insert_at(lst, index, value):
     - Use comments to explain how insertion performance may vary depending on
       where the insertion occurs.
     """
-    pass
+    def insert_at(lst, index, value):
+        """
+        TODO (Student):
+        Insert a value into the list at the specified index.
+
+        Requirements:
+        - Use a list operation to insert the value.
+        - Add comments explaining what happens to existing elements
+          after an insertion occurs.
+        - Use comments to explain how insertion performance may vary depending on
+          where the insertion occurs.
+        """
+
+    # Insert the new value at the requested index.
+    lst.insert(index, value)
+
+    # Elements at and after this index shift one position to the right.
+    # Inserting near the beginning usually takes more work than inserting
+    # near the end because more elements may need to be shifted.
 
 
 def delete_at(lst, index):
@@ -36,7 +54,25 @@ def delete_at(lst, index):
     - Return None if the index is invalid.
     - Add comments explaining why index validation and safe deletion are important.
     """
-    pass
+    def delete_at(lst, index):
+        """
+        TODO (Student):
+        Remove and return the value at the specified index.
+
+        Requirements:
+        - Validate that the index exists.
+        - Return the removed value.
+        - Return None if the index is invalid.
+        - Add comments explaining why index validation and safe deletion are important.
+        """
+
+    # Check that the index is within the valid range before removing anything.
+    if index < 0 or index >= len(lst):
+        return None
+
+    # Removing safely prevents an IndexError when the position does not exist.
+    # pop() removes the item at the specified index and returns the removed value.
+    return lst.pop(index)
 
 
 def search_value(lst, value):
@@ -49,7 +85,25 @@ def search_value(lst, value):
     - Return -1 if the value is not found.
     - Add comments explaining why this is a linear search and why it scans sequentially.
     """
-    pass
+    def search_value(lst, value):
+        """
+        TODO (Student):
+        Search for a value within the list.
+
+        Requirements:
+        - Return the index if the value is found.
+        - Return -1 if the value is not found.
+        - Add comments explaining why this is a linear search and why it scans sequentially.
+        """
+
+    # Check each item from the beginning of the list to the end.
+    # This is a linear search because values are examined one at a time in sequence.
+    for index in range(len(lst)):
+        if lst[index] == value:
+            return index
+
+    # Return -1 when the value does not appear anywhere in the list.
+    return -1
 
 
 def main():
@@ -70,7 +124,22 @@ def main():
     # 5. Use comments to explain each step in the implementation.
 
     print("\n=== INSERTION TESTS ===")
-    print("TODO: Create a list and demonstrate insertions.")
+
+    # Start with a list containing several values.
+    values = [10, 20, 30, 40]
+    print("Original list:", values)
+
+    # Insert a value at the beginning of the list.
+    insert_at(values, 0, 5)
+    print("After inserting 5 at the beginning:", values)
+
+    # Insert a value in the middle of the list.
+    insert_at(values, 3, 25)
+    print("After inserting 25 in the middle:", values)
+
+    # Insert a value at the end of the list.
+    insert_at(values, len(values), 50)
+    print("After inserting 50 at the end:", values)
 
     # ===============================
     # TODO (Student): DELETION TESTS
@@ -86,7 +155,22 @@ def main():
     # 4. Use comments to clearly explain what is happening in the output.
 
     print("\n=== DELETION TESTS ===")
-    print("TODO: Demonstrate deletions from multiple positions.")
+
+    # Remove the first item and display what was removed.
+    removed = delete_at(values, 0)
+    print("Removed from beginning:", removed)
+    print("Updated list:", values)
+
+    # Remove an item from the middle of the list.
+    middle_index = len(values) // 2
+    removed = delete_at(values, middle_index)
+    print("Removed from middle:", removed)
+    print("Updated list:", values)
+
+    # Remove the last item in the list.
+    removed = delete_at(values, len(values) - 1)
+    print("Removed from end:", removed)
+    print("Updated list:", values)
 
     # ===============================
     # TODO (Student): SEARCH TESTS
@@ -99,7 +183,14 @@ def main():
     # 4. Use comments to explain each step.
 
     print("\n=== SEARCH TESTS ===")
-    print("TODO: Demonstrate searching for values.")
+
+    # Search for a value that exists in the list.
+    result = search_value(values, 20)
+    print("Index of 20:", result)
+
+    # Search for a value that is not in the list.
+    result = search_value(values, 99)
+    print("Index of 99:", result)
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -115,8 +206,15 @@ def main():
     # - Use comments to explain each edge case.
 
     print("\n=== EDGE CASES ===")
-    print("TODO: Demonstrate at least two edge cases.")
 
+    # Edge case 1: Try deleting from an invalid index.
+    invalid_delete = delete_at(values, 100)
+    print("Deleting at invalid index returns:", invalid_delete)
+
+    # Edge case 2: Insert into an empty list.
+    empty_list = []
+    insert_at(empty_list, 0, 99)
+    print("After inserting into an empty list:", empty_list)
 
 
 if __name__ == "__main__":
